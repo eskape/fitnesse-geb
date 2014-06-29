@@ -1,0 +1,118 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>fitnesse-geb</groupId>
+  <artifactId>fitnesse-geb</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>fitnesse-geb</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <fitnesse.version>20140201</fitnesse.version>
+    <fitnesse.port>8000</fitnesse.port>
+    <fitnesse.expiration>0</fitnesse.expiration>
+    <maven-classpath-plugin.version>1.7</maven-classpath-plugin.version>
+    <selenium.version>2.42.0</selenium.version>
+    <groovy.version>2.3.3</groovy.version>
+    <geb.version>0.9.3</geb.version>
+    <geb.env>chrome</geb.env>
+   </properties>
+
+
+  <dependencies>
+      <dependency>
+          <groupId>org.fitnesse</groupId>
+          <artifactId>fitnesse</artifactId>
+          <version>${fitnesse.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.fitnesse.plugins</groupId>
+          <artifactId>maven-classpath-plugin</artifactId>
+          <version>${maven-classpath-plugin.version}</version>
+          <scope>runtime</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.codehaus.groovy</groupId>
+          <artifactId>groovy-all</artifactId>
+          <version>${groovy.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.gebish</groupId>
+          <artifactId>geb-core</artifactId>
+          <version>${geb.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.seleniumhq.selenium</groupId>
+          <artifactId>selenium-java</artifactId>
+          <version>${selenium.version}</version>
+      </dependency>
+  </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <version>1.5</version>
+                <configuration>
+                    <providerSelection>1.8</providerSelection>
+                    <source/>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generateStubs</goal>
+                            <goal>compile</goal>
+                            <goal>generateTestStubs</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>fitnesse</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>start-fitnesse</id>
+                                <phase>test</phase>
+                                <configuration>
+                                    <tasks>
+                                        <echo taskname="fitnesse" message="Starting FitNesse ... " />
+                                        <java classname="fitnesseMain.FitNesseMain" classpathref="maven.runtime.classpath" fork="true">
+                                            <arg line="-p ${fitnesse.port}" />
+                                            <arg line="-d ." />
+                                            <arg line="-e ${fitnesse.expiration}" />
+                                            <jvmarg value="-Dgeb.env=${geb.env}" />
+                                        </java>
+                                    </tasks>
+                                </configuration>
+
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.fitnesse.plugins</groupId>
+                    <artifactId>maven-classpath-plugin</artifactId>
+                    <version>${maven-classpath-plugin.version}</version>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+</project>

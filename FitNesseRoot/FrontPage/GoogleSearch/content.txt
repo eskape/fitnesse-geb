@@ -1,0 +1,6 @@
+Feature: As a user I should be able to perform a simple google search
+
+!|search google                                                    |
+|search string  |first search result?                              |
+|Test Automation|Test automation - Wikipedia, the free encyclopedia|
+|Xebia          |Xebia.com: Home                                   |
