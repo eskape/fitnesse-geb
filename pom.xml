@@ -11,11 +11,11 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <fitnesse.version>20140201</fitnesse.version>
+    <fitnesse.version>20140418</fitnesse.version>
     <fitnesse.port>8000</fitnesse.port>
     <fitnesse.expiration>0</fitnesse.expiration>
     <maven-classpath-plugin.version>1.7</maven-classpath-plugin.version>
-    <selenium.version>2.42.0</selenium.version>
+    <selenium.version>2.42.2</selenium.version>
     <groovy.version>2.3.3</groovy.version>
     <geb.version>0.9.3</geb.version>
     <geb.env>chrome</geb.env>
