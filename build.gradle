@@ -4,7 +4,7 @@
 
 apply plugin: 'groovy'
 
-def gebEnvironment = hasProperty('gebEnv') ? gebEnvironment : 'chrome'
+def gebEnvironment = hasProperty('gebEnvironment') ? gebEnvironment : 'chrome'
 
 repositories {
   mavenCentral()
@@ -36,7 +36,7 @@ task("wiki", type: JavaExec) {
   classpath configurations.fitnesse
   main "fitnesseMain.FitNesseMain"
   args "-p", "8000", "-e", "0"
-  jvmArgs "-Dgeb.env=${gebEnvironment}"
+  jvmArgs "-DgebEnvironment=${gebEnvironment}"
 }
 
 /// === Custom Tasks

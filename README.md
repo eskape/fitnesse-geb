@@ -6,6 +6,7 @@ Features
 --------
 
 * Full Geb - FitNesse Integration roundtrip
+* Using gradle - thanks to Arjan Molenaar - [gradle fitnesse classpath builder](https://github.com/amolenaar/gradle-fitnesse-classpath-builder)
 * Data-driven Google Search test.
 
 Getting Started
@@ -13,13 +14,13 @@ Getting Started
 
 Execute the following command:
 
-	$ mvn -Pfitnesse test
+	$ gradle wiki
 
 Open a browser, pointing at http://localhost:8000
-You can alter browsers by modifying the system property: geb.env
+You can alter browsers by modifying the system property: gebEnvironment
 
-Execute the following command to run with firefox:
+Execute the following command to run with Firefox:
 
-    $ mvn -Pfitnesse test -Dgeb-env=firefox
+    $ gradle wiki -DgebEnvironment=firefox
     
  
