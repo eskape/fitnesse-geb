@@ -1,0 +1,64 @@
+/*
+ * Example build file
+ */
+
+apply plugin: 'groovy'
+
+def gebEnvironment = hasProperty('gebEnv') ? gebEnvironment : 'chrome'
+
+repositories {
+  mavenCentral()
+}
+configurations {
+    fitnesse
+}
+dependencies {
+  fitnesse 'org.fitnesse:fitnesse:20140901'
+  runtime 'org.fitnesse:fitnesse:20140901:standalone'
+
+  compile 'org.codehaus.groovy:groovy-all:2.3.3'
+  compile 'org.gebish:geb-core:0.9.3'
+  compile 'org.seleniumhq.selenium:selenium-java:2.43.1'
+  compile "org.codehaus.groovy:groovy-all:2.1.2"
+
+}
+
+task("writeFitNesseClasspath", type: WriteFitNesseClasspath) {
+  classpath = project.configurations.fitnesse + configurations.runtime + configurations.compile
+  pagePath = project.file("FitNesseRoot/GradleClasspath")
+}
+
+project.tasks.getByName("clean").dependsOn("cleanWriteFitNesseClasspath")
+
+task("wiki", type: JavaExec) {
+  dependsOn writeFitNesseClasspath
+  dependsOn build
+  classpath configurations.fitnesse
+  main "fitnesseMain.FitNesseMain"
+  args "-p", "8000", "-e", "0"
+  jvmArgs "-Dgeb.env=${gebEnvironment}"
+}
+
+/// === Custom Tasks
+
+class WriteFitNesseClasspath extends DefaultTask {
+  @Input
+  def classpath
+
+  @OutputDirectory
+  File pagePath
+
+  @TaskAction
+  def generatePage() {
+    def contentTxt = project.file("${pagePath}/content.txt")
+    contentTxt.createNewFile()
+    contentTxt.withWriter { writer ->
+      writer.writeLine("!path ${project.sourceSets.main.output.classesDir}")
+      writer.writeLine("!path src/main/resources")
+      classpath.each { d ->
+        writer.writeLine("!path $d")
+      }
+    }
+  }
+}
+

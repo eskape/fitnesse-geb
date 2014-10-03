@@ -3,6 +3,5 @@
 !*> Definitions and classpath
 !define COMMAND_PATTERN {java -Dgeb.env=${geb.env} -cp %p %m}
 !define TEST_SYSTEM {slim}
-!pomFile pom.xml
-!note Release ${FITNESSE_VERSION}
 *!
+!include -c .GradleClasspath
