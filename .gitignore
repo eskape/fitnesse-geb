@@ -10,5 +10,7 @@ gradle-app.setting
 #Other stuff
 .DS_Store
 .idea/
+FitNesseRoot/updateList
+FitNesseRoot/updateDoNotCopyOverList
 
 
