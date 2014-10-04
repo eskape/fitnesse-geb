@@ -21,6 +21,6 @@ You can alter browsers by modifying the system property: gebEnvironment
 
 Execute the following command to run with Firefox:
 
-    $ gradle wiki -DgebEnvironment=firefox
+    $ gradle wiki -Dgeb.env=firefox
     
  
