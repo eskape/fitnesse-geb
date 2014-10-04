@@ -4,8 +4,6 @@
 
 apply plugin: 'groovy'
 
-def gebEnvironment = hasProperty('gebEnvironment') ? gebEnvironment : 'chrome'
-
 repositories {
   mavenCentral()
 }
@@ -23,19 +21,21 @@ dependencies {
 }
 
 task("writeFitNesseClasspath", type: WriteFitNesseClasspath) {
-  classpath = project.configurations.fitnesse + configurations.runtime + configurations.compile
-  pagePath = project.file("FitNesseRoot/GradleClasspath")
+    classpath = project.configurations.fitnesse + configurations.runtime
+    pagePath = project.file("FitNesseRoot/GradleClasspath")
 }
 
 project.tasks.getByName("clean").dependsOn("cleanWriteFitNesseClasspath")
-
 task("wiki", type: JavaExec) {
   dependsOn writeFitNesseClasspath
   dependsOn build
   classpath configurations.fitnesse
   main "fitnesseMain.FitNesseMain"
   args "-p", "8000", "-e", "0"
-  jvmArgs "-DgebEnvironment=${gebEnvironment}"
+
+    def gebEnv = (System.getProperty("geb.env")) ? (System.getProperty("geb.env")) : "chrome"
+    jvmArgs "-Dgeb.env=${gebEnv}"
+
 }
 
 /// === Custom Tasks
