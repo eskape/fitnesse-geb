@@ -19,8 +19,8 @@ Execute the following command:
 Open a browser, pointing at http://localhost:8000
 You can alter browsers by modifying the system property: gebEnvironment
 
-Execute the following command to run with Firefox:
+Execute the following command to run with Chrome:
 
-    $ gradle wiki -Dgeb.env=firefox
+    $ gradle wiki -Dgeb.env=chrome
     
  
