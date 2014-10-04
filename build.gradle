@@ -33,7 +33,7 @@ task("wiki", type: JavaExec) {
   main "fitnesseMain.FitNesseMain"
   args "-p", "8000", "-e", "0"
 
-    def gebEnv = (System.getProperty("geb.env")) ? (System.getProperty("geb.env")) : "chrome"
+    def gebEnv = (System.getProperty("geb.env")) ? (System.getProperty("geb.env")) : "firefox"
     jvmArgs "-Dgeb.env=${gebEnv}"
 
 }
