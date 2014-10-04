@@ -10,7 +10,16 @@ gradle-app.setting
 #Other stuff
 .DS_Store
 .idea/
+FitNesseRoot/properties
 FitNesseRoot/updateList
 FitNesseRoot/updateDoNotCopyOverList
+FitNesseRoot/ErrorLogs/
+FitNesseRoot/files/
+FitNesseRoot/PageFooter/
+FitNesseRoot/PageHeader/
+FitNesseRoot/RecentChanges/
+FitNesseRoot/TemplateLibrary/
+
+
 
 
